@@ -1,0 +1,54 @@
+body {
+    font-family: Comic Sans MS;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+iframe {
+    margin-top: 20px;
+}
+
+.drawing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+canvas {
+    border: 2px solid black;
+    cursor: none; /* Hide default cursor for custom preview */
+}
+
+.controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.color-picker,
+.clear-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.color-picker {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.clear-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.controls label {
+    font-size: 18px;
+}

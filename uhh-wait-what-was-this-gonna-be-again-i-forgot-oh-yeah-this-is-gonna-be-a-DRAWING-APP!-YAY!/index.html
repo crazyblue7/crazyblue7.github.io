@@ -20,125 +20,170 @@
 
         <script>
             const canvas = document.getElementById('drawingCanvas');
-            const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
 
-            const offscreenCanvas = document.createElement('canvas');
-            offscreenCanvas.width = canvas.width;
-            offscreenCanvas.height = canvas.height;
-            const offscreenCtx = offscreenCanvas.getContext('2d');
+// Off-screen canvas for persistent drawing
+const offscreenCanvas = document.createElement('canvas');
+offscreenCanvas.width = canvas.width;
+offscreenCanvas.height = canvas.height;
+const offscreenCtx = offscreenCanvas.getContext('2d');
 
-            let isDrawing = false;
-            let isErasing = false;
-            let lastX = 0;
-            let lastY = 0;
-            let brushRadius = 5;
-            let currentColor = '#000000';
+let isDrawing = false;
+let isErasing = false;
+let lastX = 0;
+let lastY = 0;
+let brushRadius = 5; // Size of the brush and eraser preview
+let currentColor = 'black'; // Default color
 
-            // Function to draw on the offscreen canvas
-            function draw(x, y) {
-    offscreenCtx.lineCap = 'round';
-    offscreenCtx.lineJoin = 'round';
-    offscreenCtx.strokeStyle = currentColor;
-    offscreenCtx.lineWidth = brushRadius * 2; // Adjust for smoother effect
+// Prevent the default scrolling behavior on mobile
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    lastX = touch.clientX - canvas.offsetLeft;
+    lastY = touch.clientY - canvas.offsetTop;
+    isDrawing = true;
+});
 
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const currentX = touch.clientX - canvas.offsetLeft;
+    const currentY = touch.clientY - canvas.offsetTop;
+
+    if (isDrawing) {
+        const dx = currentX - lastX;
+        const dy = currentY - lastY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const steps = Math.max(1, distance / 2);
+
+        for (let i = 0; i < steps; i++) {
+            const x = lastX + (dx / steps) * i;
+            const y = lastY + (dy / steps) * i;
+            draw(x, y);
+        }
+    } else if (isErasing) {
+        erase(currentX, currentY);
+    }
+
+    lastX = currentX;
+    lastY = currentY;
+
+    // Redraw the preview
+    redrawCanvasWithPreview(currentX, currentY);
+});
+
+canvas.addEventListener('touchend', () => {
+    isDrawing = false;
+    isErasing = false;
+});
+
+canvas.addEventListener('touchcancel', () => {
+    isDrawing = false;
+    isErasing = false;
+});
+
+// Event listeners for mouse actions (same as before)
+canvas.addEventListener('mousedown', (e) => {
+    if (e.button === 0) { // Left click for drawing
+        isDrawing = true;
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+    } else if (e.button === 2) { // Right click for erasing
+        isErasing = true;
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+    }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing && !isErasing) return;
+    const currentX = e.offsetX;
+    const currentY = e.offsetY;
+
+    if (isDrawing) {
+        const dx = currentX - lastX;
+        const dy = currentY - lastY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const steps = Math.max(1, distance / 2);
+
+        for (let i = 0; i < steps; i++) {
+            const x = lastX + (dx / steps) * i;
+            const y = lastY + (dy / steps) * i;
+            draw(x, y);
+        }
+    } else if (isErasing) {
+        erase(currentX, currentY);
+    }
+
+    lastX = currentX;
+    lastY = currentY;
+
+    // Redraw the preview
+    redrawCanvasWithPreview(currentX, currentY);
+});
+
+canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+    isErasing = false;
+});
+
+canvas.addEventListener('contextmenu', (e) => {
+    e.preventDefault(); // Prevent right-click context menu
+});
+
+function draw(x, y) {
     offscreenCtx.beginPath();
-    offscreenCtx.moveTo(lastX, lastY);
-    offscreenCtx.lineTo(x, y);
-    offscreenCtx.stroke();
-}
-
-
-            // Function to erase on the offscreen canvas
-            function erase(x, y) {
-    offscreenCtx.globalCompositeOperation = 'destination-out'; // Erase by making pixels transparent
-    offscreenCtx.beginPath();
-    offscreenCtx.arc(x, y, brushRadius, 0, Math.PI * 2);
+    offscreenCtx.arc(x, y, brushRadius, 0, Math.PI * 2); // Small circle for each point
+    offscreenCtx.fillStyle = currentColor;
     offscreenCtx.fill();
-    offscreenCtx.globalCompositeOperation = 'source-over'; // Reset to default drawing mode
 }
-            
-            // Redraw the canvas
-            function redrawCanvasWithPreview(cursorX, cursorY) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(offscreenCanvas, 0, 0);
 
-                // Draw preview circle
-                if (cursorX >= 0 && cursorY >= 0) {
-                    ctx.beginPath();
-                    ctx.arc(cursorX, cursorY, brushRadius, 0, Math.PI * 2);
-                    ctx.strokeStyle = isErasing ? 'red' : currentColor;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-            }
+function erase(x, y) {
+    offscreenCtx.clearRect(x - brushRadius, y - brushRadius, brushRadius * 2, brushRadius * 2);
+}
 
-            // Event Listeners
-            canvas.addEventListener('mousedown', (e) => {
-                if (e.button === 0) isDrawing = true;
-                if (e.button === 2) isErasing = true;
-                lastX = e.offsetX;
-                lastY = e.offsetY;
-            });
+function redrawCanvasWithPreview(cursorX, cursorY) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the main canvas
+    ctx.drawImage(offscreenCanvas, 0, 0); // Draw the offscreen canvas onto the main canvas
+    drawCursorPreview(cursorX, cursorY); // Draw the preview
+}
 
-            canvas.addEventListener('mousemove', (e) => {
-                const currentX = e.offsetX;
-                const currentY = e.offsetY;
+function drawCursorPreview(x, y) {
+    ctx.beginPath();
+    ctx.arc(x, y, brushRadius, 0, Math.PI * 2);
+    ctx.strokeStyle = isErasing ? 'red' : currentColor; // Red for eraser, color for brush
+    ctx.lineWidth = 1;
+    ctx.stroke();
+}
 
-                const isOutsideCanvas =
-                    currentX < 0 || currentX > canvas.width ||
-                    currentY < 0 || currentY > canvas.height;
+// Event listener to change brush size
+document.getElementById('brushSizeSlider').addEventListener('input', (e) => {
+    brushRadius = parseInt(e.target.value, 10);
+});
 
-                if (isOutsideCanvas) {
-                    isDrawing = false;
-                    isErasing = false;
-                    return;
-                }
+// Event listener to change color
+document.getElementById('colorPicker').addEventListener('input', (e) => {
+    currentColor = e.target.value;
+});
 
-                if (isDrawing) draw(currentX, currentY);
-                if (isErasing) erase(currentX, currentY);
+// Function to clear both canvases
+document.getElementById('clearCanvasButton').addEventListener('click', () => {
+    offscreenCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    redrawCanvasWithPreview(-100, -100); // Move preview off-screen
+});
 
-                lastX = currentX;
-                lastY = currentY;
-                redrawCanvasWithPreview(currentX, currentY);
-            });
+// Event listeners for the buttons to toggle between Brush and Eraser modes
+document.getElementById('brushButton').addEventListener('click', () => {
+    isErasing = false;
+    isDrawing = true;
+});
 
-            canvas.addEventListener('mouseup', () => {
-                isDrawing = false;
-                isErasing = false;
-            });
+document.getElementById('eraserButton').addEventListener('click', () => {
+    isDrawing = false;
+    isErasing = true;
+});
 
-            canvas.addEventListener('mouseleave', () => {
-                isDrawing = false;
-                isErasing = false;
-            });
-
-            canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-
-            // Brush size and color
-            document.getElementById('brushSizeSlider').addEventListener('input', (e) => {
-                brushRadius = parseInt(e.target.value, 10);
-            });
-
-            document.getElementById('colorPicker').addEventListener('input', (e) => {
-                currentColor = e.target.value;
-            });
-
-            // Clear canvas
-            document.getElementById('clearCanvasButton').addEventListener('click', () => {
-                offscreenCtx.clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
-                redrawCanvasWithPreview(-100, -100);
-            });
-
-            // Brush and Eraser mode buttons
-            document.getElementById('brushButton').addEventListener('click', () => {
-                isErasing = false;
-                isDrawing = true;
-            });
-
-            document.getElementById('eraserButton').addEventListener('click', () => {
-                isDrawing = false;
-                isErasing = true;
-            });
         </script>
         <iframe width="720" height="405" src="https://www.youtube.com/embed/7aj_GwEEbnI?si=Kqbq6h4jrn-GXteF" title="uhh some situation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </body>

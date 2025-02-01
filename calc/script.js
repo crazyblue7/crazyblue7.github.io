@@ -19,9 +19,6 @@ function calc(){
     }
     let newX = Number(x);
     let newY = Number(y);
-    print(newX);
-    print(newY);
-    print(newX * newY);
     x = newX;
     y = newY;
     if(times <= 0){

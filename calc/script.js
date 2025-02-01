@@ -19,6 +19,9 @@ function calc(){
     }
     let newX = Number(x);
     let newY = Number(y);
+    print(newX);
+    print(newY);
+    print(newX * newY);
     x = newX;
     y = newY;
     if(times <= 0){
@@ -31,28 +34,29 @@ function calc(){
         print(quaso);
     }
     let action = prompt("what to do with them? (1 = \"+\", 2 = \"-\", 3 = \"x\", 1 = \"÷\")");
-    
-    if (action = "1") {
+    print(action);
+    if (action == "1") {
         print(x+y);
         alert(x+y);
         times = times + 1;
         calc();
-    } else if(action = "2"){
-        print(x+y);
+    }
+    if(action == "2"){
+        print(x-y);
         alert(x-y);
         times = times + 1;
         calc();
-    } else if(action = "3"){
-        print(x+y);
+    }
+    if(action == "3"){
+        print(x*y);
         alert(x*y)
         times = times + 1;
         calc();
-    } else if(action = "4"){
-        print(x+y);
+    }
+    if(action == "4"){
+        print(x/y);
         alert(x/y);
         times = times + 1;
         calc();
-    } else {
-        return quaso;
     }
 }

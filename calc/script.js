@@ -30,7 +30,7 @@ function calc(){
         alert(quaso);
         print(quaso);
     }
-    let action = prompt("what to do with them?");
+    let action = prompt("what to do with them? (1 = \"+\", 2 = \"-\", 3 = \"x\", 1 = \"÷\")");
     
     if (action = "1") {
         print(x+y);

@@ -23,11 +23,11 @@ function calc(){
     y = newY;
     if(times <= 0){
         print(quaso);
-        alert(quaso);
+        alert(quaso + " (skip me)");
         print(quaso);
-        alert(quaso);
+        alert(quaso + " (skip me)");
         print(quaso);
-        alert(quaso);
+        alert(quaso + " (skip me)");
         print(quaso);
     }
     let action = prompt("what to do with them? (1 = \"+\", 2 = \"-\", 3 = \"x\", 1 = \"÷\")");

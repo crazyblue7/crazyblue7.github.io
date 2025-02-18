@@ -3,7 +3,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #000;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'Lucida Sans'
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Lucida Sans', cursive
 }
 #main {
     padding: 10px;

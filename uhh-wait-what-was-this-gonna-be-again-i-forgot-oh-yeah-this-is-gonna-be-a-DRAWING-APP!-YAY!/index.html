@@ -9,7 +9,7 @@
             <canvas id="drawingCanvas" width="500" height="500"></canvas>
             <div class="controls">
                 <label for="brushSizeSlider">Brush Size: </label>
-                <input type="range" id="brushSizeSlider" min="1" max="50" value="5">
+                <input type="range" id="brushSizeSlider" min="1" max="50" value="3">
                 <label for="colorPicker">Pick a color:</label>
                 <input type="color" id="colorPicker" class="color-picker" value="#000000">
                 <button id="clearCanvasButton" class="clear-button">Clear Canvas</button>
@@ -31,7 +31,7 @@
             let isErasing = false;
             let lastX = 0;
             let lastY = 0;
-            let brushRadius = 5;
+            let brushRadius = 3;
             let currentColor = '#000000';
 
             // Function to draw on the offscreen canvas

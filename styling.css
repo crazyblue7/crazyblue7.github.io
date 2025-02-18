@@ -1,5 +1,14 @@
 body {
-    background-color: #ff807f;
+    background-color: gradient(#ff807f, #007f80);
     color: #000000;
-    font-family: 'Comic Sans MS'
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Lucida Sans'
+}
+#main {
+    padding: 10px;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50px;
+    border-color: black;
+    margin: 50px;
+    background-color: skyblue;
 }

@@ -1,6 +1,8 @@
 body {
-    background-color: #ff807f;
-    color: #000000;
+    background: linear-gradient(to top,#F4A698, #00BFB2);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #000;
     font-family: 'Comic Sans MS', 'Comic Sans', 'Lucida Sans'
 }
 #main {
@@ -10,5 +12,5 @@ body {
     border-radius: 50px;
     border-color: black;
     margin: 50px;
-    background-color: skyblue;
+    background-color: #F4A698;
 }

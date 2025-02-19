@@ -17,10 +17,8 @@ function calc(){
     if(y == ""){
         return quaso
     }
-    let newX = Number(x);
-    let newY = Number(y);
-    x = newX;
-    y = newY;
+    x = Number(x);
+    y = Number(y);
     if(times <= 0){
         print(quaso);
         alert(quaso + " (skip me)");
@@ -36,24 +34,25 @@ function calc(){
         print(x+y);
         alert(x+y);
         times = times + 1;
+        print("done!");
         calc();
-    }
-    if(action == "2"){
+    } else if(action == "2"){
         print(x-y);
         alert(x-y);
         times = times + 1;
+        print("done!");
         calc();
-    }
-    if(action == "3"){
+    } else if(action == "3"){
         print(x*y);
         alert(x*y)
         times = times + 1;
+        print("done!");
         calc();
-    }
-    if(action == "4"){
+    } else if(action == "4"){
         print(x/y);
         alert(x/y);
         times = times + 1;
+        print("done!");
         calc();
     }
 }

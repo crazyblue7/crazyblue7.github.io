@@ -28,27 +28,28 @@ function calc(){
         alert(quaso + " (skip me)");
         print(quaso);
     }
-    let action = prompt("what to do with them? (1 = \"+\", 2 = \"-\", 3 = \"x\", 4 = \"÷\")");
+    let action = Number(prompt("what to do with them? (1 = \"+\", 2 = \"-\", 3 = \"x\", 4 = \"÷\")"));
     print(action);
-    if (action == "1") {
+    switch (action) {
+        case 1:
         print(x+y);
         alert(x+y);
         times = times + 1;
         print("done!");
         calc();
-    } else if(action == "2"){
+    case 2:
         print(x-y);
         alert(x-y);
         times = times + 1;
         print("done!");
         calc();
-    } else if(action == "3"){
+    case 3:
         print(x*y);
         alert(x*y)
         times = times + 1;
         print("done!");
         calc();
-    } else if(action == "4"){
+    case 4:
         print(x/y);
         alert(x/y);
         times = times + 1;

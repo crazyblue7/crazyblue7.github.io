@@ -1,0 +1,7 @@
+body {
+    background: linear-gradient(to top,#F4A698, #00BFB2);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #000;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Lucida Sans', sans-serif
+}

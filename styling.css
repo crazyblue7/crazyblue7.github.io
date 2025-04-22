@@ -1,9 +1,18 @@
+@font-face {
+    font-family: smol;
+    src: url(fontsmol.ttf);
+}
+@font-face {
+    font-family: font;
+    src: url(font.ttf);
+}
 body {
     background: linear-gradient(to top,#F4A698, #00BFB2);
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #000;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'Lucida Sans', sans-serif
+    font-family: font;
+    font-size: 0.4cm;
 }
 #main {
     padding: 10px;
@@ -27,4 +36,8 @@ body {
     border-radius: 52px;
     left: center;
     margin-top: -10px;
+}
+.smol {
+    font-family: smol;
+    font-size: 0.3cm;
 }

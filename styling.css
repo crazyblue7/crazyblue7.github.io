@@ -1,5 +1,5 @@
 @font-face {
-    font-family: smol;
+    font-family: gothic;
     src: url(fontsmol.ttf);
 }
 @font-face {
@@ -38,6 +38,12 @@ body {
     margin-top: -10px;
 }
 .smol {
-    font-family: smol;
+    font-family: gothic;
     font-size: 0.3cm;
+}
+.comic {
+    font-family: font;
+}
+.gothic {
+    font-family: gothic;
 }

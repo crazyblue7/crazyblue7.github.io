@@ -14,7 +14,7 @@ body {
     font-family: font;
     font-size: 0.4cm;
 }
-#main {
+.border {
     padding: 10px;
     border-width: 10px;
     border-style: solid;

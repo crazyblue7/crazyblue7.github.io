@@ -11,15 +11,15 @@ let times = 0;
 function calc(){
     let x = prompt("x?");
     if(x == ""){
-        return quaso;
+        return;
     }
     let y = prompt("y?");
     if(y == ""){
-        return quaso;
+        return;
     }
     x = Number(x);
     y = Number(y);
-    if(times <= 0){
+    if(times == 0){
         print(quaso);
         alert(quaso + " (skip me)");
         print(quaso);

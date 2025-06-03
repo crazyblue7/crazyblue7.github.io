@@ -11,11 +11,11 @@ let times = 0;
 function calc(){
     let x = prompt("x?");
     if(x == ""){
-        return quaso
+        return quaso;
     }
     let y = prompt("y?");
     if(y == ""){
-        return quaso
+        return quaso;
     }
     x = Number(x);
     y = Number(y);

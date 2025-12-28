@@ -1,9 +1,9 @@
-let password = "";
-let min = Number(document.getElementById("mintxt").value);
-let max = Number(document.getElementById("maxtxt").value);
-let len = Math.floor((Math.random()*12)+8);
-let labelius = document.getElementById("labelius");
 function main() {
+    let password = "";
+    let min = Number(document.getElementById("mintxt").value);
+    let max = Number(document.getElementById("maxtxt").value);
+    let len = Math.floor((Math.random()*12)+8);
+    let labelius = document.getElementById("labelius");
     const lowerchars = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
     const upperchars = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
     const special   =  ["1","2","3","4","5","6","7","8","9","0","!","@","#","$","%","/","*","-","+","?"];

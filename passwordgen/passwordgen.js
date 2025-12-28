@@ -17,5 +17,6 @@ function main() {
         password += special[Math.floor(Math.random()*special.length)];
       }
     }
+    console.log(password);
     labelius.innerHTML = "password: " + password;
 }

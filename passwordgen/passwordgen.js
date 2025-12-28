@@ -10,9 +10,9 @@ function main() {
     for (let i = 0; i < len +1; i++) {
       arrayToUse = Math.floor(Math.random()*3) + 1;
       if (arrayToUse == 1) {
-        password += lowerchars[Math.floor(Math.random()*lowerchars.length + 1)];
+        password += lowerchars[Math.floor(Math.random()*lowerchars.length)];
       } else if (arrayToUse == 2) {
-        password += upperchars[Math.floor(Math.random()*upperchars.length + 1)];
+        password += upperchars[Math.floor(Math.random()*upperchars.length)];
       } else {
         password += special[Math.floor(Math.random()*special.length)];
       }

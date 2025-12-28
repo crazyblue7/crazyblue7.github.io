@@ -1,6 +1,6 @@
 let password = "";
-let min = 8;
-let max = 20;
+let min = Number(document.getElementById("mintxt").value);
+let max = Number(document.getElementById("maxtxt").value);
 let len = Math.floor((Math.random()*12)+8);
 let labelius = document.getElementById("labelius");
 function main() {

@@ -1,5 +1,24 @@
 {
-  "dependencies": {
-    "mongodb": "^7.1.0"
+  "name": "crazyblue7.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/crazyblue7/crazyblue7.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/crazyblue7/crazyblue7.github.io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazyblue7/crazyblue7.github.io.git"
+  },
+  "license": "ISC",
+  "author": "mewocoolguy",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start":"electron39 .",
+    "test": "echo error; exit 1"
+  },
+  "devDependencies": {
+    "electron": "^42.0.1"
   }
 }

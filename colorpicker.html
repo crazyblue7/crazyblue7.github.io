@@ -10,9 +10,9 @@
   </body>
   <script>
     function wait(sec) {
-      let counter = sec*1000;
+      let counter = sec*10000;
       while ( counter >= 0 ) {
-        counter--;
+        counter = counter - 1;
       }
     }
     function copycolor() {

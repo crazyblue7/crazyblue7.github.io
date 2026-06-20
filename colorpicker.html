@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>colorpicker</title>
+  </head>
+  <body>
+    <title>color picker!</title>
+    <input type="color" id="colorpicker">
+    <button onclick="copycolor();"></button>
+    <p id="alert"></p>
+  </body>
+  <script>
+    function wait(sec) {
+      let counter = sec*1000;
+      while ( counter >= 0 ) {
+        counter--;
+      }
+    }
+    function copycolor() {
+      let color = document.getElementById("colorpicker").value;
+      navigator.clipboard.writeText(color);
+      let alerty = document.getElementById("alert");
+      alerty.innerHTML = "copied!";
+      wait(2);
+    }
+  </script>
+</html>
